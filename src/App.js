@@ -4,12 +4,16 @@ import Credentials from './Credentials';
 import Service from './api/Service';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Browse from './pages/Browse';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import Comparison from './pages/Comparison';
 
 function App() {
 
   const credits = Credentials();
   const service = Service;
-
 
   const [token, setToken] = useState('');
   const [categories, setCategories] = useState([]);
@@ -35,7 +39,15 @@ function App() {
   }, [])
 
   return (
-    <Navbar />
+    // <Navbar />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home title={"home page test"} />}></Route>
+        <Route path='/trends' element={<Browse title={"trends page test"} />}></Route>
+        <Route path='/search' element={<Search title={"search page test"} />}></Route>
+        <Route path='/comparison' element={<Comparison title={"comparison page test"} />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 
 }

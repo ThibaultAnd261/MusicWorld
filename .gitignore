@@ -2,11 +2,6 @@
 
 # dependencies
 /node_modules
-/src/App.test.js
-/src/App.css
-/src/index.css
-/src/reportWebVitals.js
-/src/setupTests.js
 /.pnp
 .pnp.js
 
