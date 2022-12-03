@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Credentials from './Credentials';
-import Service from './Service';
+import Service from './api/Service';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
