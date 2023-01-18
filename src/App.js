@@ -1,8 +1,7 @@
 import './App.css';
-import Navbar from './components/Navbar';
 import Credentials from './Credentials';
 import Service from './api/Service';
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Browse from './pages/Browse';
@@ -28,24 +27,18 @@ function App() {
       data: 'grant_type=client_credentials',
       method: 'POST'
     }).then(async tokenResponse => {
-      setToken(tokenResponse.data.access_token);
-
-      let listCate = await service.browse(tokenResponse.data.access_token);
-      // console.log(listCate.data.categories.items);
-      setCategories(listCate.data.categories.items);
-      // console.log(categories);
+      localStorage.setItem('tokenAuthor', tokenResponse.data.access_token);
     });
-
   }, [])
 
   return (
     // <Navbar />
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home title={"home page test"} />}></Route>
-        <Route path='/trends' element={<Browse title={"trends page test"} />}></Route>
-        <Route path='/search' element={<Search title={"search page test"} />}></Route>
-        <Route path='/comparison' element={<Comparison title={"comparison page test"} />}></Route>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/trends' element={<Browse />}></Route>
+        <Route path='/search' element={<Search />}></Route>
+        <Route path='/comparison' element={<Comparison />}></Route>
       </Routes>
     </BrowserRouter>
   );

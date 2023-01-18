@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 
-const Search = () => {
+const Search = (props) => {
+    console.log(props.token);
     return (
         <div>
             <Navbar />

@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 
-const Comparison = () => {
+const Comparison = (props) => {
+    console.log(props.token);
     return (
         <>
             <Navbar />
