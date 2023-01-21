@@ -12,10 +12,6 @@ import Comparison from './pages/Comparison';
 function App() {
 
   const credits = Credentials();
-  const service = Service;
-
-  const [token, setToken] = useState('');
-  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
 

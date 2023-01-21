@@ -2,7 +2,7 @@ import axios from "axios";
 const baseUrl = "https://api.spotify.com";
 
 let Service = {
-    async browse(token) {
+    async categorie(token) {
         return axios(baseUrl + '/v1/browse/categories', {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
@@ -21,7 +21,7 @@ let Service = {
         })
     },
     async recommendations(token) {
-        return axios(baseUrl + '/v1/recommendations', {
+        return axios(baseUrl + '/v1/recommendations/available-genre-seeds', {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
         })
