@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Service from '../api/Service';
 import Card from '../components/Card';
+import BrowseBar from '../components/BrowseBar';
 
 const Browse = () => {
 
@@ -10,31 +11,35 @@ const Browse = () => {
     const service = Service;
     const [releaseList, setReleaseList] = useState();
     const [categorieList, setCategorieList] = useState();
+    const [featPlayList, setFeaturedPlaylist] = useState();
+
+    const [rangeValue1, setRangeValue1] = useState(10); // rangeValue pour la première bar
+    const [rangeValue2, setRangeValue2] = useState(4); // rangeValue pour la première bar
+
+    const [length1, setFirstLength] = useState();
+    const [length2, setSecondLength] = useState();
 
     useEffect(() => {
         const loadNewRel = async () => {
             let listRel = await service.release(token);
-            // console.log(listRel.data.albums.items);
-            // console.log("new rel----");
-            setReleaseList(listRel.data.albums.items)
+            // console.log(listRel.data.albums.items.length);
+            setFirstLength(listRel.data.albums.items.length);
+            setReleaseList(listRel.data.albums.items);
         }
 
         const loadCate = async () => {
             let listCate = await service.categorie(token);
-            // console.log(listCate.data.categories.items);
-            // console.log("listCate----");
             setCategorieList(listCate.data.categories.items)
         }
 
         const loadFeat = async () => {
             let listFeat = await service.featuredPlay(token);
-            // console.log(listFeat.data.playlists.items);
-            // console.log("listFeat-----");
+            setFeaturedPlaylist(listFeat.data.playlists.items);
+            setSecondLength(listFeat.data.playlists.items.length);
         }
 
         const loadReco = async () => {
             let listReco = await service.recommendations(token);
-            // console.log(listReco);
         }
 
         loadNewRel();
@@ -43,24 +48,33 @@ const Browse = () => {
         loadReco();
     }, [])
 
+    const rangeFct1 = (rangeVl) => {
+        setRangeValue1(rangeVl);
+    }
+
+    const rangeFct2 = (rangeVl) => {
+        setRangeValue2(rangeVl);
+    }
+
+
     if (releaseList) {
         return (
             <>
                 <Navbar />
-                <h1>Browse Page</h1>
-                <br />
-                <h1>Voici la liste des nouvelles sorties Spotify</h1>
+
+                <BrowseBar feature={"NewRelease"} func={rangeFct1} limit={length1}/>
 
                 <div className='grid grid-cols-4 p-8'>
-                {/* <div className='flex flex-wrap justify-between p-8'> */}
-                    {releaseList.map((elmtRelease, key) => {
-                        return <Card key={key} list={elmtRelease} />
+                    {releaseList.slice(0, rangeValue1).map((elmtRelease, key) => {
+                        return <Card key={key} list={elmtRelease} type="Album"/>
                     })}
                 </div>
-
-                <br />
-                <h1>Voici des playlists Spotify </h1>
-                {/* <Card /> */}
+                <BrowseBar feature={"FeaturedPlay"} func={rangeFct2} limit={length2}/>
+                <div className='grid grid-cols-4 p-8'>
+                    {featPlayList.slice(0, rangeValue2).map((playlist,key) => {
+                        return <Card key={key} list={playlist} type="Playlist"/>
+                    })}
+                </div>
                 <br />
             </>
         );
