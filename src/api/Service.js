@@ -25,6 +25,12 @@ let Service = {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
         })
+    },
+    async getAlbum(token,id){
+        return axios(baseUrl + '/v1/albums/'+id, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
     }
 }
 

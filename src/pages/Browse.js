@@ -14,7 +14,7 @@ const Browse = () => {
     const [featPlayList, setFeaturedPlaylist] = useState();
 
     const [rangeValue1, setRangeValue1] = useState(10); // rangeValue pour la première bar
-    const [rangeValue2, setRangeValue2] = useState(4); // rangeValue pour la première bar
+    const [rangeValue2, setRangeValue2] = useState(); // rangeValue pour la première bar
 
     const [length1, setFirstLength] = useState();
     const [length2, setSecondLength] = useState();
@@ -22,7 +22,6 @@ const Browse = () => {
     useEffect(() => {
         const loadNewRel = async () => {
             let listRel = await service.release(token);
-            // console.log(listRel.data.albums.items.length);
             setFirstLength(listRel.data.albums.items.length);
             setReleaseList(listRel.data.albums.items);
         }
@@ -65,15 +64,15 @@ const Browse = () => {
                 <BrowseBar feature={"NewRelease"} func={rangeFct1} limit={length1}/>
 
                 <div className='grid grid-cols-4 p-8'>
-                    {releaseList.slice(0, rangeValue1).map((elmtRelease, key) => {
+                    {releaseList ? releaseList.slice(0, rangeValue1).map((elmtRelease, key) => {
                         return <Card key={key} list={elmtRelease} type="Album"/>
-                    })}
+                    }) : "Chargement..."}
                 </div>
                 <BrowseBar feature={"FeaturedPlay"} func={rangeFct2} limit={length2}/>
                 <div className='grid grid-cols-4 p-8'>
-                    {featPlayList.slice(0, rangeValue2).map((playlist,key) => {
+                    {featPlayList ? featPlayList.slice(0, rangeValue2).map((playlist,key) => {
                         return <Card key={key} list={playlist} type="Playlist"/>
-                    })}
+                    }) : "Chargement..."}
                 </div>
                 <br />
             </>

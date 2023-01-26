@@ -1,13 +1,13 @@
 import './App.css';
 import Credentials from './Credentials';
-import Service from './api/Service';
-import { createContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Browse from './pages/Browse';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Comparison from './pages/Comparison';
+import Album from './pages/Album';
 
 function App() {
 
@@ -35,6 +35,8 @@ function App() {
         <Route path='/trends' element={<Browse />}></Route>
         <Route path='/search' element={<Search />}></Route>
         <Route path='/comparison' element={<Comparison />}></Route>
+        <Route path='/album/:id' element={<Album />}></Route>
+        <Route path='/album/*' element={<Home />}></Route>
       </Routes>
     </BrowserRouter>
   );
