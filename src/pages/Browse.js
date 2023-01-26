@@ -14,7 +14,7 @@ const Browse = () => {
     const [featPlayList, setFeaturedPlaylist] = useState();
 
     const [rangeValue1, setRangeValue1] = useState(10); // rangeValue pour la première bar
-    const [rangeValue2, setRangeValue2] = useState(); // rangeValue pour la première bar
+    const [rangeValue2, setRangeValue2] = useState(4); // rangeValue pour la première bar
 
     const [length1, setFirstLength] = useState();
     const [length2, setSecondLength] = useState();
