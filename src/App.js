@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Comparison from './pages/Comparison';
 import Album from './pages/Album';
+import Artist from './pages/Artist';
+import Track from './pages/Track';
 
 function App() {
 
@@ -28,7 +30,6 @@ function App() {
   }, [])
 
   return (
-    // <Navbar />
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />}></Route>
@@ -36,7 +37,11 @@ function App() {
         <Route path='/search' element={<Search />}></Route>
         <Route path='/comparison' element={<Comparison />}></Route>
         <Route path='/album/:id' element={<Album />}></Route>
-        <Route path='/album/*' element={<Home />}></Route>
+        <Route path='/album/:id/*' element={<Home />}></Route>
+        <Route path='/artist/:id' element={<Artist />}></Route>
+        <Route path='/artist/:id/*' element={<Home />}></Route>
+        <Route path='/track/:id' element={<Track />}></Route>
+        <Route path='/track/:id/*' element={<Home />}></Route>
       </Routes>
     </BrowserRouter>
   );
