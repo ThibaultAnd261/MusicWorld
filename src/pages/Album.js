@@ -14,6 +14,7 @@ const Album = () => {
     const [album, setAlbum] = useState();
     const [trackList, setTrackList] = useState();
     const [popularity, setPopularity] = useState();
+    const [dateRelease, setDateRelease] = useState();
     const [artistId, setArtistId] = useState([]); // permet de définir les id nécéssaires pour les principaux de l'album
 
     useEffect(() => {
@@ -24,7 +25,10 @@ const Album = () => {
             setPopularity(albumRes.data.popularity);
             albumRes.data.artists.map(artist => {
                 setArtistId(artistId => [...artistId, artist.id]) // <=> push des elmts dans une array
-            })
+            });
+
+            const date = new Date(albumRes.data.release_date);
+            setDateRelease(date.toLocaleDateString());
         }
         getAlbum();
     }, [])
@@ -54,13 +58,13 @@ const Album = () => {
 
                         <div className='w-1/2'>
                             <img className='w-full' src={album.images[0].url} alt="" />
-                            <p className='text-lg py-2'>{album.name} - {album.artists.map((artist, key) => {
-                                return <span key={key}><b className='cursor-pointer hover:underline'><a href={"/artist/"+artistId[key]}>{artist.name}</a></b> </span>
+                            <p className='text-2xl py-2'>{album.name} - {album.artists.map((artist, key) => {
+                                return <span key={key}><b className='cursor-pointer hover:underline'><a href={"/artist/" + artistId[key]}>{artist.name}</a></b> </span>
                             })
                             }
                             </p>
                             <p className='text-lg py-2'>Label : {album.label}</p>
-                            <p className='text-lg py-2'>Sortie : {album.release_date}</p>
+                            <p className='text-lg py-2'>Sortie : {dateRelease}</p>
                             <p className='text-lg py-2'>Total tracks : {trackList.length}</p>
                             <div className="flex items-center py-2">
                                 {displayStars()}
@@ -69,10 +73,14 @@ const Album = () => {
                         </div>
 
                         <div className='w-1/2 pl-4'>
-                            <p className='text-lg'>Liste des tracks :</p>
+                            <h1 className='text-xl font-medium'>Liste des tracks :</h1>
 
-                            <div>{trackList.map((track, key) => {
-                                return <TrackDiv key={key} track={track} />
+                            <div>{trackList.map((track, index) => {
+                                return (
+                                    <div className='p-2 my-4 shadow-inner shadow-green-600 hover:scale-105' key={index}>
+                                        <TrackDiv track={track} />
+                                    </div>
+                                )
                             })}</div>
 
                         </div>
