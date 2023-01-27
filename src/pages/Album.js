@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Service from '../api/Service';
 import Navbar from '../components/Navbar';
+import TrackDiv from '../components/TrackDiv';
 
 const Album = () => {
     const token = localStorage.getItem('tokenAuthor');
@@ -71,18 +72,7 @@ const Album = () => {
                             <p className='text-lg'>Liste des tracks :</p>
 
                             <div>{trackList.map((track, key) => {
-                                return (
-                                    <div className='py-2' key={key}>
-                                        <span className='text-lg'>{track.track_number} : </span>
-                                        <span className='text-lg'><a href={"/track/"+track.id} className='cursor-pointer hover:underline'>"{track.name}"</a>, </span>
-                                        {track.artists.map((artist, key2) => {
-                                            return <span className='text-lg' key={key2}><b className='cursor-pointer hover:underline'><a href={"/artist/"+artist.id}>{artist.name}</a></b>
-                                                {key2 == (track.artists.length) - 1 ? "" : " / "}
-                                            </span>
-                                        })}
-                                        <br />
-                                    </div>
-                                )
+                                return <TrackDiv key={key} track={track} />
                             })}</div>
 
                         </div>
