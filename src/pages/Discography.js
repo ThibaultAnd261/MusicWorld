@@ -22,7 +22,6 @@ const Discography = () => {
         }
         const getArtistAlbums = async () => {
             let artistAlbum = await service.getArtistDiscography(token, param.id, "&include_groups=album");
-            console.log(artistAlbum.data.items);
             setArtistAlb(artistAlbum.data.items);
         }
         const getArtistSingles = async () => {
@@ -39,56 +38,70 @@ const Discography = () => {
         getArtistApparition();
     }, []);
 
-    if (artist && artistAlb && artistSingle) {
+    if (artist && artistAlb && artistSingle && artistAppartion) {
         return (
             <>
                 <Navbar />
-                <div className='pt-5 px-10'>
-                    <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
-                    <div className='flex items-center'>
-                        <h1 className='text-6xl font-bold pt-2'>
-                            Discographie | {artist.name}.
-                        </h1>
-                        <img className='w-32 h-32 rounded-full ml-4' src={artist.images[0].url} alt="" />
-                    </div>
-                </div>
+                <div className='bg-[#fffbf5]'>
 
-                <div className='p-10'>
-                    <h1 className='text-xl font-medium pb-2'>{artistAlb.length > 1 ? "Albums produits : ": "Album produit : "}</h1>
-                    <div className='grid grid-cols-4'>
-                        {artistAlb.map((album, key) => {
-                            return (
-                                <Card key={key} list={album} type={"Album"} />
-                            )
-                        })}
+                    <div className='pt-5 px-10'>
+                        <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
+                        <div className='flex items-center'>
+                            <h1 className='text-6xl font-bold pt-2'>
+                                Discographie | {artist.name}.
+                            </h1>
+                            <img className='w-32 h-32 rounded-full ml-4' src={artist.images[0].url} alt="" />
+                        </div>
                     </div>
-                </div>
 
-                <div className='p-10'>
-                    <h1 className='text-xl font-medium pb-2'>{artistSingle.length > 1 ? "Singles produits :": "Single produit :"}</h1>
-                    <div className='grid grid-cols-4'>
-                        {artistSingle.map((album, key) => {
-                            return (
-                                <Card key={key} list={album} type={"Single"} />
-                            )
-                        })}
+                    <div className='p-10'>
+                        <h1 className='text-xl font-medium pb-2'>{artistAlb.length > 1 ? "Albums produits : " : "Album produit : "}</h1>
+                        <div className='grid grid-cols-4'>
+                            {artistAlb.map((album, key) => {
+                                return (
+                                    <Card key={key} list={album} type={"Album"} />
+                                )
+                            })}
+                        </div>
                     </div>
-                </div>
 
-                <div className='p-10'>
-                    <h1 className='text-xl font-medium pb-2'>{artistAppartion.length > 1 ? "Apparitions :": "Apparition :"}</h1>
-                    <div className='grid grid-cols-4'>
-                        {artistAppartion.map((album, key) => {
-                            return (
-                                <Card key={key} list={album} type={"Single"} />
-                            )
-                        })}
+                    <div className='p-10'>
+                        <h1 className='text-xl font-medium pb-2'>{artistSingle.length > 1 ? "Singles produits :" : "Single produit :"}</h1>
+                        <div className='grid grid-cols-4'>
+                            {artistSingle.map((album, key) => {
+                                return (
+                                    <Card key={key} list={album} type={"Single"} />
+                                )
+                            })}
+                        </div>
+                    </div>
+
+                    <div className='p-10'>
+                        <h1 className='text-xl font-medium pb-2'>{artistAppartion.length > 1 ? "Apparitions :" : "Apparition :"}</h1>
+                        <div className='grid grid-cols-4'>
+                            {artistAppartion.map((album, key) => {
+                                return (
+                                    <Card key={key} list={album} type={"Single"} />
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
             </>
         );
     } else {
-        <p>Chargement..</p>
+        <div className="absolute bg-white bg-opacity-60 z-10 h-full w-full flex items-center justify-center">
+            <div className="flex items-center">
+                <span className="text-3xl mr-4">Chargement des données...</span>
+                <svg className="animate-spin h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"></circle>
+                    <path className="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+            </div>
+        </div>
     }
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = (props) => {
     let list = props.list;
-
+    
     if (list) {
         if (props.type === "Album" || props.type === "Single") {
             return (
@@ -10,7 +10,7 @@ const Card = (props) => {
                     <img className="w-full animate__animated animate__fadeInRight animate__delay-.5s" src={list.images[0].url} alt="" />
                     <h1 className='w-full h-8 text-center truncate hover:text-clip'>{list.name}</h1>
                     <p className='w-full text-center'>{(list.artists.length > 1 ? "Artistes" : "Artiste")} : {list.artists.map((artist, key) => {
-                        return <span key={key}><b>{artist.name}</b>{key === (list.artists.length) - 1 ? "" : ", "}</span>
+                        return <span key={key}><b className='cursor-pointer hover:underline'><a href={"/artist/" + artist.id}>{artist.name}</a></b>{key === (list.artists.length) - 1 ? "" : ", "}</span>
                     })}</p>
                     <h3 className='mt-3 mb-20 capitalize'>{list.album_type}</h3>
                     <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-full absolute bottom-2">
