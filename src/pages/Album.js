@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Service from '../api/Service';
 import Navbar from '../components/Navbar';
 import TrackDiv from '../components/TrackDiv';
+import Stars from '../components/Stars';
 
 const Album = () => {
     const token = localStorage.getItem('tokenAuthor');
@@ -53,6 +54,7 @@ const Album = () => {
 
                     <div className='pt-5 px-10'>
                         <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
+                        <h1 className='text-6xl font-bold pt-2'>Page Album.</h1>
                     </div>
                     <div className='flex justify-between p-10'>
 
@@ -66,19 +68,16 @@ const Album = () => {
                             <p className='text-lg py-2'>Label : {album.label}</p>
                             <p className='text-lg py-2'>Sortie : {dateRelease}</p>
                             <p className='text-lg py-2'>Total tracks : {trackList.length}</p>
-                            <div className="flex items-center py-2">
-                                {displayStars()}
-                                <p className="ml-2 text-base">Une popularité classée à {popularity}/100</p>
-                            </div>
+                            <Stars popularity={popularity} />
                         </div>
 
-                        <div className='w-1/2 pl-4'>
+                        <div className='w-1/2 pl-5'>
                             <h1 className='text-xl font-medium'>Liste des tracks :</h1>
 
                             <div>{trackList.map((track, index) => {
                                 return (
                                     <div className='p-2 my-4 shadow-inner shadow-green-600 hover:scale-105' key={index}>
-                                        <TrackDiv track={track} />
+                                        <TrackDiv track={track} nbTrack={true} />
                                     </div>
                                 )
                             })}</div>

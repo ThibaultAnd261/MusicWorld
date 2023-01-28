@@ -9,7 +9,7 @@ let Service = {
         })
     },
     async release(token) {
-        return axios(baseUrl + '/v1/browse/new-releases', {
+        return axios(baseUrl + '/v1/browse/new-releases?limit=32', {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
         })
@@ -34,6 +34,24 @@ let Service = {
     },
     async getArtist(token,id){
         return axios(baseUrl + '/v1/artists/'+id,{
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token } 
+        })
+    },
+    async getArtistTopTracks(token,id){
+        return axios(baseUrl + '/v1/artists/'+id+'/top-tracks?market=FR',{
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token } 
+        })
+    },
+    async getArtistAlbums(token,id){
+        return axios(baseUrl + '/v1/artists/'+id+'/albums',{
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token } 
+        })
+    },
+    async getArtistRelatedArtists(token,id){
+        return axios(baseUrl + '/v1/artists/'+id+'/related-artists',{
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token } 
         })
