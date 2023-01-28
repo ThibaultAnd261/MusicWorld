@@ -55,6 +55,12 @@ let Service = {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token } 
         })
+    },
+    async getArtistDiscography(token,id,type){ // type = album ? single ? appears_on ? compilation ?
+        return axios(baseUrl + '/v1/artists/'+id+'/albums?limit=50'+type,{
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token } 
+        })
     }
 }
 

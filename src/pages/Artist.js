@@ -7,8 +7,6 @@ import TrackDiv from '../components/TrackDiv';
 import Stars from '../components/Stars';
 import Avatar from '../components/Avatar';
 
-// TODO : Faire un tri sur les albums (enlever les doublons, les albums avec qu'une seule musique,...)
-
 const Artist = () => {
     const token = localStorage.getItem('tokenAuthor');
     const param = useParams();
@@ -24,7 +22,6 @@ const Artist = () => {
     useEffect(() => {
         const getArtist = async () => {
             let artistRes = await service.getArtist(token, param.id);
-            console.log(artistRes.data);
             setArtist(artistRes.data);
         }
         const getArtistTT = async () => {
@@ -37,7 +34,6 @@ const Artist = () => {
         }
         const getArtistsRelated = async () => {
             let artistsRel = await service.getArtistRelatedArtists(token, param.id);
-            // console.log(artistsRel.data.artists);
             setArtistRelated(artistsRel.data.artists);
         }
 
@@ -64,6 +60,7 @@ const Artist = () => {
                         })}</p>
                         <p className='text-lg py-2'>Nombre de followers : {(artist.followers.total).toLocaleString('fr-FR')}</p>
                         <Stars popularity={artist.popularity} />
+                        <button type='button' className="text-black bg-green-600 w-full font-medium rounded-lg text-lg px-6 py-2.5 text-center my-10"><a href={"/artist/"+artist.id+"/discography"}>Afficher la discographie</a></button>
                     </div>
 
                     <div className='w-1/2 pl-5'>
@@ -79,7 +76,7 @@ const Artist = () => {
                         <h1 className='text-xl font-medium pb-2'>Albums :</h1>
                         <div className='grid grid-cols-3'>
                             {artistAlb.filter(album =>
-                                album.album_type === "album"
+                                album.album_group === "album"
                             ).map((album, index) => {
                                 return (
                                     <Card key={index} list={album} type="Album" />

@@ -10,6 +10,7 @@ import Comparison from './pages/Comparison';
 import Album from './pages/Album';
 import Artist from './pages/Artist';
 import Track from './pages/Track';
+import Discography from './pages/Discography';
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
         <Route path='/album/:id/*' element={<Home />}></Route>
         <Route path='/artist/:id' element={<Artist />}></Route>
         <Route path='/artist/:id/*' element={<Home />}></Route>
+        <Route path='/artist/:id/discography' element={<Discography />}></Route>
+        <Route path='/artist/:id/discography/*' element={<Home />}></Route>
         <Route path='/track/:id' element={<Track />}></Route>
         <Route path='/track/:id/*' element={<Home />}></Route>
       </Routes>

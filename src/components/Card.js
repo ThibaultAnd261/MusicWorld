@@ -4,7 +4,7 @@ const Card = (props) => {
     let list = props.list;
 
     if (list) {
-        if (props.type === "Album") {
+        if (props.type === "Album" || props.type === "Single") {
             return (
                 <div className='flex flex-col items-center bg-green-600 m-3 p-3 rounded-lg hover:scale-105 relative'>
                     <img className="w-full animate__animated animate__fadeInRight animate__delay-.5s" src={list.images[0].url} alt="" />
