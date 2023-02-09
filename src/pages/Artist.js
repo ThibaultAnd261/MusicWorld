@@ -31,11 +31,9 @@ const Artist = () => {
         const getArtistAlbums = async () => {
             let artistAlbums = await service.getArtistAlbums(token, param.id);
             setArtistAlb(artistAlbums.data.items);
-            // console.log(artistAlbums.data.items);
         }
         const getArtistsRelated = async () => {
             let artistsRel = await service.getArtistRelatedArtists(token, param.id);
-            console.log(artistsRel.data.artists)
             setArtistRelated(artistsRel.data.artists);
         }
 
@@ -84,7 +82,7 @@ const Artist = () => {
                             </div>
                             <h1 className='text-xl font-medium pb-2'>Albums :</h1>
                             <div className='grid grid-cols-3'>
-                                {artistAlb.filter(album =>
+                                {artistAlb.filter(album => 
                                     album.album_group === "album"
                                 ).map((album, index) => {
                                     return (

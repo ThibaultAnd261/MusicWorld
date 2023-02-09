@@ -54,10 +54,12 @@ const Discography = () => {
                         </div>
                     </div>
 
+                    <div className='bg-[#fffbf5] sticky z-50 top-14'>
+                        <h1 className='text-xl font-medium px-10 py-5'>{artistAlb.length > 1 ? "Albums produits : " : "Album produit : "}</h1>
+                    </div>
                     <div className='p-10'>
-                        <h1 className='text-xl font-medium pb-2'>{artistAlb.length > 1 ? "Albums produits : " : "Album produit : "}</h1>
-                        <div className='grid grid-cols-4'>
-                            {artistAlb.map((album, key) => {
+                        <div className={artistAlb.length === 0 ? "" : "grid grid-cols-4"}>
+                            {artistAlb.length === 0 ? <p className='text-lg py-2 text-center'>Aucun album produit</p> : artistAlb.map((album, key) => {
                                 return (
                                     <Card key={key} list={album} type={"Album"} />
                                 )
@@ -65,10 +67,12 @@ const Discography = () => {
                         </div>
                     </div>
 
+                    <div className='bg-[#fffbf5] sticky z-50 top-14'>
+                        <h1 className='text-xl font-medium px-10 py-5'>{artistSingle.length > 1 ? "Singles produits :" : "Single produit :"}</h1>
+                    </div>
                     <div className='p-10'>
-                        <h1 className='text-xl font-medium pb-2'>{artistSingle.length > 1 ? "Singles produits :" : "Single produit :"}</h1>
-                        <div className='grid grid-cols-4'>
-                            {artistSingle.map((album, key) => {
+                        <div className={artistSingle.length === 0 ? "" : "grid grid-cols-4"}>
+                            {artistSingle.length === 0 ? <p className='text-lg py-2 text-center'>Aucun single produit</p> : artistSingle.map((album, key) => {
                                 return (
                                     <Card key={key} list={album} type={"Single"} />
                                 )
@@ -76,10 +80,12 @@ const Discography = () => {
                         </div>
                     </div>
 
+                    <div className='bg-[#fffbf5] sticky z-50 top-14'>
+                        <h1 className='text-xl font-medium px-10 py-5'>{artistAppartion.length > 1 ? "Apparitions :" : "Apparition :"}</h1>
+                    </div>
                     <div className='p-10'>
-                        <h1 className='text-xl font-medium pb-2'>{artistAppartion.length > 1 ? "Apparitions :" : "Apparition :"}</h1>
-                        <div className='grid grid-cols-4'>
-                            {artistAppartion.map((album, key) => {
+                        <div className={artistAppartion.length === 0 ? "" : "grid grid-cols-4"}>
+                            {artistAppartion.length === 0 ? <p className='text-lg py-2 text-center'>Aucun(e) featuring/apparition</p> : artistAppartion.map((album, key) => {
                                 return (
                                     <Card key={key} list={album} type={"Single"} />
                                 )

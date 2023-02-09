@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Service from '../api/Service';
 import Avatar from '../components/Avatar';
 import Navbar from '../components/Navbar';
+import Stars from '../components/Stars';
 
 const Track = () => {
     const token = localStorage.getItem('tokenAuthor');
@@ -13,12 +14,13 @@ const Track = () => {
 
     const [track, setTrack] = useState();
     const [artistsList, setArtistList] = useState([]);
+    const [trackAlbum, setAlbumTrack] = useState(); // provenance du track -> quel album
 
     useEffect(() => {
         const getTrack = async () => {
             let track = await service.getTrack(token, param.id);
             setTrack(track.data);
-
+            setAlbumTrack(track.data.album)
             track.data.artists.map((art) => {
                 getArtist(art.id);
             })
@@ -34,35 +36,47 @@ const Track = () => {
         setArtistList(artistsList => [...artistsList, artist.data]);
     }
 
-    function convertMilli(millis){
-        let mn = Math.floor(millis/60000)
+    function convertMilli(millis) {
+        let mn = Math.floor(millis / 60000)
         let sec = Math.floor(millis / 1000) % 60
-        // return (mn === 0 ? '':'') + (mn === 1 ? '  minute ' : ' minutes ') + (sec < 10 ? '0' : '') + sec + (sec === 1 ? '  seconde' : ' secondes')
-        return (mn === 0 ? '': (mn === 1 ? '  minute ' : mn + ' minutes ')) + (sec < 10 ? '0' : '') + sec + (sec === 1 ? '  seconde' : ' secondes')
+        return (mn === 0 ? '' : (mn === 1 ? mn + ' minute ' : mn + ' minutes ')) + (sec < 10 ? '0' : '') + sec + (sec === 1 ? '  seconde' : ' secondes')
     }
 
-    // console.log(track)
+    console.log(track)
 
-    if (track && artistsList) {
+    if (track && artistsList && trackAlbum) {
         return (
             <div>
                 <Navbar />
-                <div className='pt-5 px-10'>
-                    <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
-                    <h1 className='text-6xl font-bold pt-2'>Track.</h1>
-                </div>
-                <div className='p-10'>
-                    <h3 className='text-xl font-medium pb-5'>Nom : {track.name}</h3>
-                    <p className='text-xl pb-5'>Durée : {convertMilli(track.duration_ms)}</p>
-                    <p className='text-xl pb-5'>{artistsList.length === 1 ? "Artiste présent sur ce track : " : "Artistes présents sur ce track :"}</p>
-                    <div className='flex flex-wrap justify-between'>
-                        {artistsList.map((artist, index) => {
-                            return (
-                                <div key={index} className='m-3 flex flex-col items-center'>
-                                    <Avatar artist={artist} />
-                                </div>
-                            )
-                        })}
+                <div className='bg-[#fffbf5]'>
+                    <div className='pt-5 px-10'>
+                        <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
+                        <h1 className='text-6xl font-bold pt-2'>Track.</h1>
+                    </div>
+                    <div className='flex justify-between p-10'>
+                        <div className='w-1/2'>
+                            <h3 className='text-xl font-medium pb-5'>Nom : {track.name}</h3>
+                            <p className='text-xl pb-5'>Durée : {convertMilli(track.duration_ms)}</p>
+                            <Stars popularity={track.popularity} />
+                            <p className='text-xl py-5'>{artistsList.length === 1 ? "Artiste présent sur ce track : " : "Artistes présents sur ce track :"}</p>
+                            <div className='flex flex-wrap'>
+                                {artistsList.map((artist, index) => {
+                                    return (
+                                        <div key={index} className='my-5 mr-10 flex flex-col items-center'>
+                                            <Avatar artist={artist} />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div className='w-1/2 pl-5'>
+                            <h3 className='text-xl pb-5'>Présent dans l'album :
+                                <b className='cursor-pointer hover:underline'>
+                                    <a className='pl-1' href={"/album/" + trackAlbum.id}>{trackAlbum.name}</a>
+                                </b>
+                            </h3>
+                            <img className='w-full' src={trackAlbum.images[0].url} alt="" />
+                        </div>
                     </div>
                 </div>
             </div>

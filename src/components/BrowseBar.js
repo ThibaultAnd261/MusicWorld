@@ -5,7 +5,7 @@ const BrowseBar = (props) => {
     let defaultVal = Math.floor((props.limit)/2);
 
     return (
-        <div className='bg-black p-[20px] flex items-center justify-between'>
+        <div className='bg-black p-[20px] flex items-center justify-between sticky z-50 top-16'>
             <legend className='text-white text-lg'> {props.feature == "NewRelease" ? "Les nouvelles sorties sur Spotify : " : "Playlists Spotify :"}</legend>
             <div>
                 <label className='text-white text-lg pr-[5px]' htmlFor="">Régler l'affichage : </label>
