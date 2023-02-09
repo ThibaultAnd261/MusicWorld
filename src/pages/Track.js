@@ -12,9 +12,7 @@ const Track = () => {
     const service = Service;
 
     const [track, setTrack] = useState();
-    // const [idList, setIdList] = useState([]);
     const [artistsList, setArtistList] = useState([]);
-    // const [artistVar, setArtist] = useState();
 
     useEffect(() => {
         const getTrack = async () => {
@@ -36,7 +34,14 @@ const Track = () => {
         setArtistList(artistsList => [...artistsList, artist.data]);
     }
 
-    console.log(artistsList)
+    function convertMilli(millis){
+        let mn = Math.floor(millis/60000)
+        let sec = Math.floor(millis / 1000) % 60
+        // return (mn === 0 ? '':'') + (mn === 1 ? '  minute ' : ' minutes ') + (sec < 10 ? '0' : '') + sec + (sec === 1 ? '  seconde' : ' secondes')
+        return (mn === 0 ? '': (mn === 1 ? '  minute ' : mn + ' minutes ')) + (sec < 10 ? '0' : '') + sec + (sec === 1 ? '  seconde' : ' secondes')
+    }
+
+    // console.log(track)
 
     if (track && artistsList) {
         return (
@@ -46,10 +51,11 @@ const Track = () => {
                     <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
                     <h1 className='text-6xl font-bold pt-2'>Track.</h1>
                 </div>
-                {/* <div className='flex flex-col justify-between p-10'> */}
-                <div className='container'>
-                    <h3>{track.name}</h3>
-                    <div className='grid grid-cols-3'>
+                <div className='p-10'>
+                    <h3 className='text-xl font-medium pb-5'>Nom : {track.name}</h3>
+                    <p className='text-xl pb-5'>Durée : {convertMilli(track.duration_ms)}</p>
+                    <p className='text-xl pb-5'>{artistsList.length === 1 ? "Artiste présent sur ce track : " : "Artistes présents sur ce track :"}</p>
+                    <div className='flex flex-wrap justify-between'>
                         {artistsList.map((artist, index) => {
                             return (
                                 <div key={index} className='m-3 flex flex-col items-center'>

@@ -2,8 +2,6 @@ import React from 'react';
 
 const Avatar = (props) => {
 
-    console.log(props);
-
     if(props){
         return (
             <>
