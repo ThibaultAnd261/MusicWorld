@@ -6,7 +6,7 @@ const Card = (props) => {
     if (list) {
         if (props.type === "Album" || props.type === "Single") {
             return (
-                <div className='flex flex-col items-center bg-green-600 m-3 p-3 rounded-lg hover:scale-105 relative'>
+                <div className='flex flex-col items-center bg-green-600 p-2 mr-3 my-3 rounded-lg hover:scale-105 relative'>
                     <img className="w-full animate__animated animate__fadeInRight animate__delay-.5s" src={list.images[0].url} alt="" />
                     <h1 className='w-full h-8 text-center truncate hover:text-clip'>{list.name}</h1>
                     <p className='w-full text-center'>{(list.artists.length > 1 ? "Artistes" : "Artiste")} : {list.artists.map((artist, key) => {

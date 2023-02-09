@@ -61,6 +61,12 @@ let Service = {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token } 
         })
+    },
+    async getTrack(token,id){
+        return axios(baseUrl + '/v1/tracks/'+id, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token } 
+        })
     }
 }
 

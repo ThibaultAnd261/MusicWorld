@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import SearchBar from '../components/SearchBar';
 
 const Search = (props) => {
-    console.log(props.token);
     return (
-        <div>
+        <>
             <Navbar />
-            <h1>search page</h1>
-        </div>
+            <SearchBar />
+        </>
     );
 };
 

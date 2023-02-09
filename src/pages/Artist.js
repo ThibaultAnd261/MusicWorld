@@ -31,9 +31,11 @@ const Artist = () => {
         const getArtistAlbums = async () => {
             let artistAlbums = await service.getArtistAlbums(token, param.id);
             setArtistAlb(artistAlbums.data.items);
+            // console.log(artistAlbums.data.items);
         }
         const getArtistsRelated = async () => {
             let artistsRel = await service.getArtistRelatedArtists(token, param.id);
+            console.log(artistsRel.data.artists)
             setArtistRelated(artistsRel.data.artists);
         }
 
