@@ -43,22 +43,21 @@ const Discography = () => {
             <>
                 <Navbar />
                 <div className='bg-[#fffbf5]'>
-
                     <div className='pt-5 px-10'>
                         <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
-                        <div className='flex items-center'>
-                            <h1 className='text-6xl font-bold pt-2'>
+                        <div className='flex flex-col md:flex-row md:items-center'>
+                            <h1 className='text-3xl md:text-6xl font-bold pt-2'>
                                 Discographie | {artist.name}.
                             </h1>
-                            <img className='w-32 h-32 rounded-full ml-4' src={artist.images[0].url} alt="" />
+                            <img className='w-44 h-44 rounded-full my-5 md:ml-4' src={artist.images[0].url} alt="" />
                         </div>
                     </div>
 
-                    <div className='bg-[#fffbf5] sticky z-50 top-14'>
-                        <h1 className='text-xl font-medium px-10 py-5'>{artistAlb.length > 1 ? "Albums produits : " : "Album produit : "}</h1>
+                    <div className='bg-[#fffbf5] sticky z-40 top-16'>
+                        <h1 className='text-xl md:text-3xl font-medium px-10 py-5'>{artistAlb.length > 1 ? "Albums produits : " : "Album produit : "}</h1>
                     </div>
                     <div className='p-10'>
-                        <div className={artistAlb.length === 0 ? "" : "grid grid-cols-4"}>
+                        <div className={artistAlb.length === 0 ? "" : "grid grid-cols-2 md:grid-cols-4"}>
                             {artistAlb.length === 0 ? <p className='text-lg py-2 text-center'>Aucun album produit</p> : artistAlb.map((album, key) => {
                                 return (
                                     <Card key={key} list={album} type={"Album"} />
@@ -67,11 +66,11 @@ const Discography = () => {
                         </div>
                     </div>
 
-                    <div className='bg-[#fffbf5] sticky z-50 top-14'>
-                        <h1 className='text-xl font-medium px-10 py-5'>{artistSingle.length > 1 ? "Singles produits :" : "Single produit :"}</h1>
+                    <div className='bg-[#fffbf5] sticky z-40 top-16'>
+                        <h1 className='text-xl md:text-3xl font-medium px-10 py-5'>{artistSingle.length > 1 ? "Singles produits :" : "Single produit :"}</h1>
                     </div>
                     <div className='p-10'>
-                        <div className={artistSingle.length === 0 ? "" : "grid grid-cols-4"}>
+                        <div className={artistSingle.length === 0 ? "" : "grid grid-cols-2 md:grid-cols-4"}>
                             {artistSingle.length === 0 ? <p className='text-lg py-2 text-center'>Aucun single produit</p> : artistSingle.map((album, key) => {
                                 return (
                                     <Card key={key} list={album} type={"Single"} />
@@ -80,11 +79,11 @@ const Discography = () => {
                         </div>
                     </div>
 
-                    <div className='bg-[#fffbf5] sticky z-50 top-14'>
-                        <h1 className='text-xl font-medium px-10 py-5'>{artistAppartion.length > 1 ? "Apparitions :" : "Apparition :"}</h1>
+                    <div className='bg-[#fffbf5] sticky z-40 top-16'>
+                        <h1 className='text-xl md:text-3xl font-medium px-10 py-5'>{artistAppartion.length > 1 ? "Apparitions :" : "Apparition :"}</h1>
                     </div>
                     <div className='p-10'>
-                        <div className={artistAppartion.length === 0 ? "" : "grid grid-cols-4"}>
+                        <div className={artistAppartion.length === 0 ? "" : "grid grid-cols-2 md:grid-cols-4"}>
                             {artistAppartion.length === 0 ? <p className='text-lg py-2 text-center'>Aucun(e) featuring/apparition</p> : artistAppartion.map((album, key) => {
                                 return (
                                     <Card key={key} list={album} type={"Single"} />

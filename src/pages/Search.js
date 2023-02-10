@@ -6,7 +6,9 @@ const Search = (props) => {
     return (
         <>
             <Navbar />
-            <SearchBar />
+            <div className='bg-[#fffbf5]'>
+                <SearchBar />
+            </div>
         </>
     );
 };

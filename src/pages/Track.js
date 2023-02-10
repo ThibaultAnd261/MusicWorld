@@ -46,19 +46,19 @@ const Track = () => {
 
     if (track && artistsList && trackAlbum) {
         return (
-            <div>
+            <>
                 <Navbar />
                 <div className='bg-[#fffbf5]'>
                     <div className='pt-5 px-10'>
                         <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
                         <h1 className='text-6xl font-bold pt-2'>Track.</h1>
                     </div>
-                    <div className='flex justify-between p-10'>
-                        <div className='w-1/2'>
-                            <h3 className='text-xl font-medium pb-5'>Nom : {track.name}</h3>
-                            <p className='text-xl pb-5'>Durée : {convertMilli(track.duration_ms)}</p>
+                    <div className='flex flex-col md:flex-row md:justify-between p-10'>
+                        <div className='md:w-1/2'>
+                            <h3 className='text-lg md:text-xl font-medium pb-5'>Nom : {track.name}</h3>
+                            <p className='text-lg md:text-xl pb-5'>Durée : {convertMilli(track.duration_ms)}</p>
                             <Stars popularity={track.popularity} />
-                            <p className='text-xl py-5'>{artistsList.length === 1 ? "Artiste présent sur ce track : " : "Artistes présents sur ce track :"}</p>
+                            <p className='text-lg md:text-xl py-5'>{artistsList.length === 1 ? "Artiste présent sur ce track : " : "Artistes présents sur ce track :"}</p>
                             <div className='flex flex-wrap'>
                                 {artistsList.map((artist, index) => {
                                     return (
@@ -69,8 +69,8 @@ const Track = () => {
                                 })}
                             </div>
                         </div>
-                        <div className='w-1/2 pl-5'>
-                            <h3 className='text-xl pb-5'>Présent dans l'album :
+                        <div className='md:w-1/2 md:pl-5'>
+                            <h3 className='text-lg md:text-xl pb-5'>Présent dans l'album :
                                 <b className='cursor-pointer hover:underline'>
                                     <a className='pl-1' href={"/album/" + trackAlbum.id}>{trackAlbum.name}</a>
                                 </b>
@@ -79,7 +79,7 @@ const Track = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     } else {
         return (

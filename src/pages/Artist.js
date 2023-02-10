@@ -54,8 +54,9 @@ const Artist = () => {
                         <h1 className='text-6xl font-bold pt-2'>{artist.name}.</h1>
                     </div>
 
-                    <div className='flex justify-between p-10'>
-                        <div className='w-1/2'>
+                    {/* <div className='flex justify-between p-10'> */}
+                    <div className='flex flex-col md:flex-row justify-between p-10'>
+                        <div className='md:w-1/2'>
                             <img className='w-full' src={artist.images[0].url} alt="" />
                             <p className='text-lg py-2'>Genres : {artist.genres.map((genre, key) => {
                                 return <span key={key} className='capitalize'>{genre}{key === (artist.genres.length) - 1 ? "" : " | "}</span>
@@ -70,7 +71,7 @@ const Artist = () => {
 
                         </div>
 
-                        <div className='w-1/2 pl-5'>
+                        <div className='md:w-1/2 md:pl-5'>
                             <h1 className='text-xl font-medium pb-2'>Top Tracks :</h1>
                             <div>{artistTT.map((track, index) => {
                                 return (
@@ -81,7 +82,7 @@ const Artist = () => {
                             })}
                             </div>
                             <h1 className='text-xl font-medium pb-2'>Albums :</h1>
-                            <div className='grid grid-cols-3'>
+                            <div className='grid grid-cols-2 lg:grid-cols-3'>
                                 {artistAlb.filter(album => 
                                     album.album_group === "album"
                                 ).map((album, index) => {
@@ -91,7 +92,7 @@ const Artist = () => {
                                 })}
                             </div>
                             <h1 className='text-xl font-medium pb-2'>Artistes similaires :</h1>
-                            <div className='grid grid-cols-3'>
+                            <div className='grid grid-cols-2 sm:grid-cols-3'>
                                 {artistRel.slice(0, 6).map((artist, index) => {
                                     return (
                                         <div key={index} className='m-3 flex flex-col items-center'>

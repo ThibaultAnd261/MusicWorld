@@ -16,9 +16,11 @@ const Stars = (props) => {
 
     if (props) {
         return (
-            <div className="flex items-center py-2">
-                {displayStars()}
-                <p className="ml-2 text-base">Une popularité classée à {props.popularity}/100</p>
+            <div className="flex flex-col md:flex-row py-2 md:items-center">
+                <div className='flex'>
+                    {displayStars()}
+                </div>
+                <p className="text-base md:ml-2">Une popularité classée à {props.popularity}/100</p>
             </div>
         );
     } else {

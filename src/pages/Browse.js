@@ -63,13 +63,13 @@ const Browse = () => {
 
                 <BrowseBar feature={"NewRelease"} func={rangeFct1} limit={length1} />
 
-                <div className='grid grid-cols-4 p-8'>
+                <div className='grid grid-cols-2 sm:grid-cols-4 p-8'>
                     {releaseList ? releaseList.slice(0, rangeValue1).map((elmtRelease, key) => {
                         return <Card key={key} list={elmtRelease} type="Album" />
                     }) : "Chargement..."}
                 </div>
                 <BrowseBar feature={"FeaturedPlay"} func={rangeFct2} limit={length2} />
-                <div className='grid grid-cols-4 p-8'>
+                <div className='grid grid-cols-2 sm:grid-cols-4 p-8'>
                     {featPlayList ? featPlayList.slice(0, rangeValue2).map((playlist, key) => {
                         return <Card key={key} list={playlist} type="Playlist" />
                     }) : "Chargement..."}

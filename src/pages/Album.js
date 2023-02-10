@@ -51,28 +51,27 @@ const Album = () => {
             <>
                 <Navbar />
                 <div className='bg-[#fffbf5]'>
-
                     <div className='pt-5 px-10'>
                         <button type="button" onClick={() => { history(-1) }} className="text-black bg-green-600 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2">Retour</button>
                         <h1 className='text-6xl font-bold pt-2'>Page Album.</h1>
                     </div>
-                    <div className='flex justify-between p-10'>
-
-                        <div className='w-1/2'>
+                    {/* <div className='flex justify-between p-10'> */}
+                    <div className='flex flex-col sm:flex-row justify-between p-10'>
+                        <div className='sm:w-1/2'>
                             <img className='w-full' src={album.images[0].url} alt="" />
-                            <p className='text-2xl py-2'>{album.name} - {album.artists.map((artist, key) => {
+                            <p className='text-2xl md:text-3xl py-2'>{album.name} - {album.artists.map((artist, key) => {
                                 return <span key={key}><b className='cursor-pointer hover:underline'><a href={"/artist/" + artistId[key]}>{artist.name}</a></b> </span>
                             })
                             }
                             </p>
-                            <p className='text-lg py-2'>Label : {album.label}</p>
-                            <p className='text-lg py-2'>Sortie : {dateRelease}</p>
-                            <p className='text-lg py-2'>Total tracks : {trackList.length}</p>
+                            <p className='text-lg md:text-xl py-2'>Label : {album.label}</p>
+                            <p className='text-lg md:text-xl py-2'>Sortie : {dateRelease}</p>
+                            <p className='text-lg md:text-xl py-2'>Total tracks : {trackList.length}</p>
                             <Stars popularity={popularity} />
                         </div>
 
-                        <div className='w-1/2 pl-5'>
-                            <h1 className='text-xl font-medium'>Liste des tracks :</h1>
+                        <div className='sm:w-1/2 sm:pl-5'>
+                            <h1 className='text-xl md:text-2xl font-medium'>Liste des tracks :</h1>
 
                             <div>{trackList.map((track, index) => {
                                 return (
