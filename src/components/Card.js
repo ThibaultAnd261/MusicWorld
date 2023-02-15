@@ -12,9 +12,9 @@ const Card = (props) => {
                     <p className='w-full text-center md:text-xl'>{(list.artists.length > 1 ? "Artistes" : "Artiste")} : {list.artists.map((artist, key) => {
                         return <span key={key}><b className='cursor-pointer hover:underline'><a href={"/artist/" + artist.id}>{artist.name}</a></b>{key === (list.artists.length) - 1 ? "" : ", "}</span>
                     })}</p>
-                    <h3 className='mt-3 mb-20 capitalize md:text-xl'>{list.album_type}</h3>
+                    <h3 className='mt-3 mb-20 capitalize md:text-lg'>{list.album_type}</h3>
                     <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full absolute bottom-2">
-                        <a href={"/album/" + list.id} className='text-sm md:text-xl'>
+                        <a href={"/album/" + list.id} className='text-xs md:text-base lg:text-lg'>
                             Plus d'informations
                         </a>
                     </button>
@@ -25,11 +25,11 @@ const Card = (props) => {
             return (
                 <div className='flex flex-col items-center bg-green-600 p-2 mr-3 my-3 rounded-lg hover:scale-105 relative'>
                     <img src={list.images[0].url} alt="" />
-                    <h1 className='w-full h-8 text-center truncate hover:text-clip'>{list.name}</h1>
-                    <p className='w-full text-center'><b>{list.owner.display_name}</b></p>
-                    <p className='w-full truncate text-center break-words mt-3 mb-20'>{list.description}</p>
+                    <h1 className='w-full h-8 text-center truncate hover:text-clip md:text-xl'>{list.name}</h1>
+                    <p className='w-full text-center md:text-xl'><b>{list.owner.display_name}</b></p>
+                    <p className='w-full truncate text-center break-words mt-3 mb-20 md:text-lg'>{list.description}</p>
                     <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full absolute bottom-2">
-                        <a href="" className='text-sm'>
+                        <a href="" className='text-xs md:text-base lg:text-lg'>
                             Plus d'informations
                         </a>
                     </button>

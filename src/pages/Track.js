@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Service from '../api/Service';
 import Avatar from '../components/Avatar';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Stars from '../components/Stars';
 
@@ -13,6 +14,7 @@ const Track = () => {
     const service = Service;
 
     const [track, setTrack] = useState();
+    const [idTrack, setIdTrack] = useState();
     const [artistsList, setArtistList] = useState([]);
     const [trackAlbum, setAlbumTrack] = useState(); // provenance du track -> quel album
 
@@ -20,7 +22,8 @@ const Track = () => {
         const getTrack = async () => {
             let track = await service.getTrack(token, param.id);
             setTrack(track.data);
-            setAlbumTrack(track.data.album)
+            setAlbumTrack(track.data.album);
+            setIdTrack(track.data.id);
             track.data.artists.map((art) => {
                 getArtist(art.id);
             })
@@ -55,7 +58,7 @@ const Track = () => {
                     </div>
                     <div className='flex flex-col md:flex-row md:justify-between p-10'>
                         <div className='md:w-1/2'>
-                            <h3 className='text-lg md:text-xl font-medium pb-5'>Nom : {track.name}</h3>
+                            <h3 className='text-lg md:text-xl font-medium pb-5 text-justify'>Nom : {track.name}</h3>
                             <p className='text-lg md:text-xl pb-5'>Durée : {convertMilli(track.duration_ms)}</p>
                             <Stars popularity={track.popularity} />
                             <p className='text-lg md:text-xl py-5'>{artistsList.length === 1 ? "Artiste présent sur ce track : " : "Artistes présents sur ce track :"}</p>
@@ -70,7 +73,7 @@ const Track = () => {
                             </div>
                         </div>
                         <div className='md:w-1/2 md:pl-5'>
-                            <h3 className='text-lg md:text-xl pb-5'>Présent dans l'album :
+                            <h3 className='text-lg md:text-xl pb-5 text-justify'>Présent dans l'album :
                                 <b className='cursor-pointer hover:underline'>
                                     <a className='pl-1' href={"/album/" + trackAlbum.id}>{trackAlbum.name}</a>
                                 </b>
@@ -79,12 +82,13 @@ const Track = () => {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </>
         );
     } else {
         return (
             <>
-                <div className="absolute bg-white bg-opacity-60 z-10 h-full w-full flex items-center justify-center">
+                <div className="absolute bg-white bg-opacity-60 z-10 h-full w-full flex flex-col items-center justify-center">
                     <div className="flex items-center">
                         <span className="text-3xl mr-4">Chargement des données...</span>
                         <svg className="animate-spin h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -94,6 +98,9 @@ const Track = () => {
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                             </path>
                         </svg>
+                    </div>
+                    <div className='flex items-center'>
+                        <span className="text-2xl my-4">(N'hésitez pas à recharger)</span>
                     </div>
                 </div>
             </>

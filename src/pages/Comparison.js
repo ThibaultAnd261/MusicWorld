@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 const Comparison = (props) => {
@@ -6,7 +7,8 @@ const Comparison = (props) => {
     return (
         <>
             <Navbar />
-            <h1>COmparison</h1>
+            <h1>Comparison</h1>
+            <Footer />
         </>
     );
 };

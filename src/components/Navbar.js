@@ -1,12 +1,13 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import logo from '../assets/img/MusicWorld Logo.png';
 
 const navigation = [
     { name: 'Accueil', href: '/', current: true },
     { name: 'Parcourir', href: '/trends', current: false },
     { name: 'Recherche', href: '/search', current: false },
-    { name: 'Comparaison', href: '/comparison', current: false },
+    // { name: 'Comparaison', href: '/comparison', current: false },
 ]
 
 function classNames(...classes) {
@@ -15,7 +16,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
     return (
-        <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50">
+        <Disclosure as="nav" className="bg-black sticky top-0 z-50">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -35,14 +36,19 @@ export default function Navbar() {
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
                                         className="block h-8 w-auto lg:hidden"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                        src={logo}
                                         alt="Your Company"
                                     />
                                     <img
                                         className="hidden h-8 w-auto lg:block"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                        src={logo}
                                         alt="Your Company"
                                     />
+                                    <span
+                                        className="block text-xl font-medium w-auto text-green-600"
+                                    >
+                                        MusicWorld
+                                    </span>
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
