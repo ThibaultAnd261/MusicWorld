@@ -68,8 +68,8 @@ let Service = {
             headers: { 'Authorization': 'Bearer ' + token } 
         })
     },
-    async search(token,q){
-        return axios(baseUrl + '/v1/search?q='+q+"&type=artist&limit=10", {
+    async search(token,q,type){
+        return axios(baseUrl + '/v1/search?q='+q+"&type="+ type +"&limit=10", {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token } 
         })
